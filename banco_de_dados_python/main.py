@@ -64,3 +64,7 @@ cursor.executemany(comando,
                     i.usa_oculos) 
                     for i in pessoas])
 """
+banco.commit()
+#fechamento das conexões
+cursor.close()
+banco.close()
