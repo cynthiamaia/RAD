@@ -64,6 +64,30 @@ cursor.executemany(comando,
                     i.usa_oculos) 
                     for i in pessoas])
 """
+"""
+###Outra forma
+pessoa = Pessoa(30345676900, 'Carlos',
+                '2000-01-31', True)
+comando = '''INSERT INTO Pessoa (cpf, 
+nome, nascimento,
+oculos) VALUES (:cpf,:nome,:nascimento,
+:usa_oculos);'''
+cursor.execute(comando, 
+               {"cpf": pessoa.cpf, 
+               "nome": pessoa.nome,
+                "nascimento":pessoa.nascimento, 
+                "usa_oculos": pessoa.usa_oculos})"""
+##simplificar mais o codigo
+"""
+pessoa = Pessoa(60345676900,
+                'João',
+                '2000-01-31',
+                True)
+comando = '''INSERT INTO Pessoa 
+(cpf, nome, nascimento, oculos) 
+VALUES (:cpf,:nome,:nascimento,:usa_oculos);'''
+cursor.execute(comando, vars(pessoa))
+print(vars(pessoa))"""
 banco.commit()
 #fechamento das conexões
 cursor.close()
