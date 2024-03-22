@@ -83,8 +83,7 @@ pessoa = Pessoa(60345676900,
                 'João',
                 '2000-01-31',
                 True)
-comando = '''INSERT INTO Pessoa 
-(cpf, nome, nascimento, oculos) 
+comando = '''INSERT INTO Pessoa (cpf, nome, nascimento, oculos) 
 VALUES (:cpf,:nome,:nascimento,:usa_oculos);'''
 cursor.execute(comando, vars(pessoa))
 print(vars(pessoa))"""
