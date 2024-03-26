@@ -87,6 +87,33 @@ comando = '''INSERT INTO Pessoa (cpf, nome, nascimento, oculos)
 VALUES (:cpf,:nome,:nascimento,:usa_oculos);'''
 cursor.execute(comando, vars(pessoa))
 print(vars(pessoa))"""
+#Adicionar Marca
+comando1 = '''INSERT INTO Marca
+(nome, sigla) 
+VALUES (:nome,:sigla);'''
+marcaA = Marca("Marca A","MA")
+cursor.execute(comando1, vars(marcaA))
+marcaA.id= cursor.lastrowid #armazena o id da linha do último registro inserido no banco
+
+marcaB = Marca("Marca B","MB")
+cursor.execute(comando1, vars(marcaB))
+marcaB.id= cursor.lastrowid
+
+#Adicionar Veiculo
+comando2 = '''INSERT INTO Veiculo (placa, ano, cor, motor, proprietario, marca) VALUES (:placa, :ano, :cor, :motor, :proprietario, :marca);'''
+veiculo1 = Veiculo("AABB001","2001", "Prata", 1.0,12345678900, 1)
+veiculo2 = Veiculo("BABB001","2002", "Preto",1.4,98765432100, 2)
+cursor.execute(comando2, vars(veiculo1))
+cursor.execute(comando2, vars(veiculo2))
+"""
+comando6 = '''SELECT Pessoa.nome, Marca.nome FROM Pessoa 
+JOIN Veiculo ON Pessoa.cpf = Veiculo.Proprietario 
+JOIN Marca ON Marca.id = Veiculo.marca 
+WHERE Marca.nome = :nome;'''
+cursor.execute(comando6,{"nome":'Marca B'})
+
+registros = cursor.fetchall()
+print(registros)"""
 banco.commit()
 #fechamento das conexões
 cursor.close()
