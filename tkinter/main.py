@@ -27,6 +27,7 @@ class PrincipalBD():
         self.entryPreco.pack()
 
 janela = tk.Tk()
+product_app = PrincipalBD(janela)
 janela.title("Bem vindo a aplicação de banco de dados")
 janela.geometry("900x700")
 janela.mainloop()
