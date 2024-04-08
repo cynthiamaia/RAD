@@ -17,7 +17,7 @@ class PrincipalBD():
         self.treeProdutos.heading("Preço", text="Preço:")
         self.treeProdutos.pack()
 
-        self.fExibirTela()
+        self.ExibirTela()
 
         self.lblNome = tk.Label(self.janela, text="Nome:")
         self.lblNome.pack()
@@ -34,7 +34,7 @@ class PrincipalBD():
         self.btnCadastrar.pack()
 
 
-    def fExibirTela(self):
+    def ExibirTela(self):
             try:
                 products = self.objBD.select_all_products() 
                 for product in products:
@@ -47,7 +47,7 @@ class PrincipalBD():
             name = self.entryNome.get()
             price = float(self.entryPreco.get())
             self.objBD.inserirDados(name, price)
-            self.fExibirTela()
+            self.ExibirTela()
 
             self.entryNome.delete(0, tk.END)
             self.entryPreco.delete(0, tk.END)
