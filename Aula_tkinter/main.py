@@ -17,12 +17,11 @@ class PrincipalBD():
         self.treeProdutos.heading("Preço", text="Preço:")
         self.treeProdutos.pack()
 
-        self.ExibirTela()
+        self.fExibirTela()
 
         self.lblNome = tk.Label(self.janela, text="Nome:")
         self.lblNome.pack()
         self.entryNome = tk.Entry(self.janela)
-        #self.entryNome = tk.Entry(self.janela,width=60)
         self.entryNome.pack()
 
         self.lblPreco = tk.Label(self.janela, text="Preço:")
@@ -33,9 +32,13 @@ class PrincipalBD():
         self.btnCadastrar = tk.Button(self.janela, text="Adicionar Produtos", command=self.CadastrarProduto)
         self.btnCadastrar.pack()
 
+        self.btnCadastrar = tk.Button(self.janela, text="Atualizar Produtos", command=self.AtualizarProduto)
+        self.btnCadastrar.pack()
 
-    def ExibirTela(self):
+
+    def fExibirTela(self):
             try:
+                self.treeProdutos.delete(*self.treeProdutos.get_children())
                 products = self.objBD.select_all_products() 
                 for product in products:
                     self.treeProdutos.insert("", tk.END, values=product)
@@ -47,7 +50,7 @@ class PrincipalBD():
             name = self.entryNome.get()
             price = float(self.entryPreco.get())
             self.objBD.inserirDados(name, price)
-            self.ExibirTela()
+            self.fExibirTela()
 
             self.entryNome.delete(0, tk.END)
             self.entryPreco.delete(0, tk.END)
@@ -55,7 +58,24 @@ class PrincipalBD():
         except:
              print('Não foi possível fazer o cadastro.')
 
-    
+    def AtualizarProduto(self):
+        try:
+            selected_item = self.treeProdutos.selection() #A função selection() retorna uma lista contendo o identificador do item selecionado.
+            if not selected_item:
+                return
+            item = self.treeProdutos.item(selected_item)
+            product = item['values']
+            product_id = product[0]
+            nome =  self.entryNome.get()
+            preco = float(self.entryPreco.get())
+            self.objBD.update_product(product_id, nome, preco) #método update_product() do objeto objBD para atualizar as informações do produto no banco de dados
+            self.fExibirTela()
+
+            self.entryNome.delete(0, tk.END)
+            self.entryPreco.delete(0, tk.END)
+            print('Produto Atualizado com Sucesso!')        
+        except:
+          print('Não foi possível fazer a atualização.')
   
 janela = tk.Tk() 
 product_app = PrincipalBD(janela) 
