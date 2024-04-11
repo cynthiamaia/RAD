@@ -50,7 +50,7 @@ class PrincipalBD():
             name = self.entryNome.get()
             price = float(self.entryPreco.get())
             self.objBD.inserirDados(name, price)
-            self.fExibirTela()
+            self.ExibirTela()
 
             self.entryNome.delete(0, tk.END)
             self.entryPreco.delete(0, tk.END)
@@ -69,7 +69,7 @@ class PrincipalBD():
             nome =  self.entryNome.get()
             preco = float(self.entryPreco.get())
             self.objBD.update_product(product_id, nome, preco) #método update_product() do objeto objBD para atualizar as informações do produto no banco de dados
-            self.fExibirTela()
+            self.ExibirTela()
 
             self.entryNome.delete(0, tk.END)
             self.entryPreco.delete(0, tk.END)
