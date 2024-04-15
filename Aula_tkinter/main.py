@@ -32,8 +32,11 @@ class PrincipalBD():
         self.btnCadastrar = tk.Button(self.janela, text="Adicionar Produtos", command=self.CadastrarProduto)
         self.btnCadastrar.pack()
 
-        self.btnCadastrar = tk.Button(self.janela, text="Atualizar Produtos", command=self.AtualizarProduto)
-        self.btnCadastrar.pack()
+        self.btnAtualizar = tk.Button(self.janela, text="Atualizar Produtos", command=self.AtualizarProduto)
+        self.btnAtualizar.pack()
+        
+        self.btnExcluirProduto = tk.Button(self.janela,text="Excluir produto", command=self.ExcluirProduto)
+        self.btnExcluirProduto.pack()
 
 
     def ExibirTela(self):
@@ -76,6 +79,24 @@ class PrincipalBD():
             print('Produto Atualizado com Sucesso!')        
         except:
           print('Não foi possível fazer a atualização.')
+    
+    def ExcluirProduto(self):
+        try:
+            selected_item = self.treeProdutos.selection()
+            if not selected_item:
+                   return
+            item = self.treeProdutos.item(selected_item)
+            print(item)
+            product = item['values']
+            print(product)
+            product_id = product[0]
+            self.objBD.delete_product(product_id)
+            self.ExibirTela()
+            self.entryNome.delete(0,tk.END)
+            self.entryPreco.delete(0,tk.END)
+            print("Produto escluido com sucesso")
+        except:
+             print("Não foi possivel excluir")
   
 janela = tk.Tk() 
 product_app = PrincipalBD(janela) 
