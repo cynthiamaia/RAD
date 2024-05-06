@@ -8,8 +8,9 @@ from app.models.products import Products
 with app.app_context(): 
     db.create_all()
 
-from app.view.reso_products import Index
+from app.view.reso_products import Index,ProductCreate
 api.add_resource(Index, '/')
+api.add_resource(ProductCreate, '/criar')
 '''@app.route("/")
 def index():
     #return "<h1> Minha Aplicação em Flask</h1>"
