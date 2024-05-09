@@ -10,14 +10,14 @@ class Products(db.Model):
     def __init__(self, name, price):
         self.name = name
         self.price = price
-
+     
     def save_products(self, name, price):
         try:
             add_banco = Products(name, price)
             print(add_banco)
-            db.session.add(add_banco) #adicionar a instância
-            db.session.commit() #confirma
-        except Exception as e: 
+            db.session.add(add_banco) 
+            db.session.commit()
+        except Exception as e:
             print(e)
 
     def update_products(self, id, name, price):
@@ -27,9 +27,3 @@ class Products(db.Model):
         except Exception as e:
             print(e)
 
-    def delete_products(self, id):
-        try:
-            db.session.query(Products).filter(Products.id==id).delete()
-            db.session.commit() #confirmar e salvar as alterações no banco de dados
-        except Exception as e:
-            print(e)
