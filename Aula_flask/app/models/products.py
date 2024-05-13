@@ -27,3 +27,10 @@ class Products(db.Model):
         except Exception as e:
             print(e)
 
+    def delete_products(self, id):
+        try:
+            db.session.query(Products).filter(Products.id==id).delete()
+            db.session.commit() #confirmar e salvar as alterações no banco de dados
+        except Exception as e:
+            print(e)
+
