@@ -12,9 +12,7 @@ argumentos_update = reqparse.RequestParser() #definir os argumentos da solicita√
 argumentos_update.add_argument('id', type=int)
 argumentos_update.add_argument('name', type=str)
 argumentos_update.add_argument('price', type=float)
-#deletar
-argumento_deletar = reqparse.RequestParser()
-argumento_deletar.add_argument('id', type=int)
+
 
 class Index(Resource):
     def get(self):
