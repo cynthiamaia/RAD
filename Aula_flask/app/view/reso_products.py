@@ -12,7 +12,9 @@ argumentos_update = reqparse.RequestParser() #definir os argumentos da solicita√
 argumentos_update.add_argument('id', type=int)
 argumentos_update.add_argument('name', type=str)
 argumentos_update.add_argument('price', type=float)
-
+#deletar
+argumentos_deletar = reqparse.RequestParser()
+argumentos_deletar.add_argument('id', type=int)
 
 class Index(Resource):
     def get(self):
@@ -39,5 +41,12 @@ class ProductUpdate(Resource):
         except Exception as e:
             return jsonify({'status': 500, 'msg': f'{e}'}), 500
 
-
+class ProductDelete(Resource):
+    def delete(self):
+        try:
+            datas = argumentos_deletar.parse_args()
+            Products.delete_products(self,datas['id'])
+            return {"message": 'Products delete successfully!'}, 200
+        except Exception as e:
+            return jsonify({'status': 500, 'msg': f'{e}'}), 500
 
