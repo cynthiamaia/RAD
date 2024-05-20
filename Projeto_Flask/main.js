@@ -15,5 +15,11 @@ document.getElementById('meuFormulario').addEventListener('submit', function(eve
         },
         body: JSON.stringify(dados)
     })
-     // tratamento da resposta da requisição
+    // tratamento da resposta da requisição
+    .then(response => response.text())
+    .catch(error =>{
+        //exibir mensagem de erro
+        document.getElementById('resposta').innerHTML = 'Erro ao processar a requisição.';
+        console.log('Erro', error);
+    });
 });
