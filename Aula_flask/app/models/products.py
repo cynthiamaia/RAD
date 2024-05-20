@@ -10,6 +10,14 @@ class Products(db.Model):
     def __init__(self, name, price):
         self.name = name
         self.price = price
+        
+    def list_id(self, product_id):
+        try:
+            products = db.session.query(Products).filter(Products.id == product_id).all()
+            products_dict = [{'id': product.id, 'name': product.name, 'price': product.price} for product in products]
+            return products_dict
+        except Exception as e: #se a operação de salvar falhas, cai na exceção
+            print(e)
      
     def save_products(self, name, price):
         try:
